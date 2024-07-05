@@ -6,8 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import static com.server.server.exceptions.Constants.*;
-
 @RestControllerAdvice
 public class ControlExceptionHandler {
 

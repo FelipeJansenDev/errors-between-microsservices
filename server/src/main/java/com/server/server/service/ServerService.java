@@ -2,7 +2,6 @@ package com.server.server.service;
 
 import com.server.server.exceptions.ServerException;
 import com.server.server.model.Sucesso;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,7 @@ public class ServerService {
         if (id == 1) {
             throw new ServerException(HttpStatus.BAD_REQUEST, ERROR_001);
         }
-        return new Sucesso();
+        return Sucesso.builder().id(1L).build();
     }
 }
 

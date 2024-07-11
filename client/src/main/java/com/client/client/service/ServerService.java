@@ -1,7 +1,9 @@
 package com.client.client.service;
 
+import com.client.client.exceptions.ClientException;
 import com.client.client.model.Sucesso;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
@@ -20,13 +22,13 @@ public class ServerService {
         this.restClient = restClient;
     }
 
-    public Sucesso testMethod() {
+    public Sucesso testMethod(Long id) {
         return restClient
                 .get()
-                .uri("http://localhost:8080?id=0")
+                .uri("http://localhost:8080?id=" + id)
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, (HttpRequest request, ClientHttpResponse response) -> {
-                    throw new ServerException(Objects.requireNonNull(response.getHeaders().get(CODE)).get(0));
+                    throw new ClientException(HttpStatus.BAD_REQUEST, Objects.requireNonNull(response.getHeaders().get(CODE)).get(0));
                 })
                 .body(Sucesso.class);
     }

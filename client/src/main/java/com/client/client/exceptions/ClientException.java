@@ -2,7 +2,6 @@ package com.client.client.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 
 @Data
@@ -13,11 +12,10 @@ import org.springframework.http.HttpStatusCode;
 public class ClientException extends RuntimeException {
 
     private final HttpStatusCode httpStatusCode;
-
     private final String code;
 
-    public BusinessExceptionBody getOnlyBody() {
-        return BusinessExceptionBody.builder()
+    public ClientExceptionBody getOnlyBody() {
+        return ClientExceptionBody.builder()
                 .code(this.code)
                 .build();
     }
@@ -27,12 +25,7 @@ public class ClientException extends RuntimeException {
     @NoArgsConstructor
     @AllArgsConstructor
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public static class BusinessExceptionBody {
+    public static class ClientExceptionBody {
         private String code;
-
-        private String message;
-
-        private String description;
-
     }
 }
